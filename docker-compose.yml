@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15.2
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: lego_db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./migrations:/docker-entrypoint-initdb.d
+    restart: always
+    ports:
+      - 54321:5432
+volumes:
+  db_data:
